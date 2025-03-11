@@ -1,0 +1,18 @@
+# Logs
+*.log
+
+# Pastas de dependências
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Configurações locais de IDE
+.vscode/
+.idea/
+
+# Arquivos de ambiente
+backend/.env
+frontend/.env
+.env
+.env.local
+.env.production
