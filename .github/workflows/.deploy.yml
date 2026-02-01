@@ -28,7 +28,7 @@ jobs:
             npm ci
             npx sequelize-cli db:migrate
             pm2 restart "${{ secrets.PM2_API_NAME }}" --update-env \
-              || PORT=3001 pm2 start src/index.js --name "${{ secrets.PM2_API_NAME }}" --update-env
+              || PORT=5010 pm2 start npm --name "${{ secrets.PM2_API_NAME }}" -- start
             cd ..
 
             # FRONTEND
