@@ -1,14 +1,14 @@
 <template>
   <aside
     :class="sidebarOpen ? 'w-64' : 'w-16'"
-    class="relative bg-gray-100 min-h-screen transition-all duration-300 flex flex-col border-r border-gray-300"
+    class="relative bg-slate-900 min-h-screen transition-all duration-300 flex flex-col border-r border-slate-700"
   >
-    <div class="flex items-center justify-between p-4 border-b border-gray-300">
-      <div class="flex items-center justify-center w-full">
-        <img v-if="sidebarOpen" src="@/assets/logo.png" alt="Logo" class="h-8 w-auto" />
-        <img v-else src="@/assets/logo-icon.png" alt="Logo" class="h-8 w-auto" />
+    <div class="flex items-center justify-between p-4 border-b border-slate-700">
+      <div class="flex items-center justify-center w-full min-w-0">
+        <Logo v-if="sidebarOpen" />
+        <img v-else src="/favicon.svg" alt="PVS.dev" class="h-8 w-8 shrink-0" />
       </div>
-      <button @click="toggleSidebar" class="absolute right-2 top-2 p-2 text-gray-700">
+      <button @click="toggleSidebar" class="absolute right-2 top-2 p-2 text-slate-300 hover:text-white transition-colors">
         <svg
           v-if="sidebarOpen"
           xmlns="http://www.w3.org/2000/svg"
@@ -47,13 +47,13 @@
         <li>
           <a
             href="#"
-            class="flex items-center space-x-2 p-5 rounded-md transition-colors bg-[var(--color-background)] text-blue-700"
+            class="flex items-center space-x-2 p-5 rounded-md transition-colors bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30"
           >
             <v-icon
               name="bi-clipboard-check-fill"
-              class="text-white h-5 hover:cursor-pointer hover:text-blue-700"
+              class="text-emerald-400 h-5 hover:cursor-pointer"
             />
-            <span v-if="sidebarOpen" class="font-semibold">Tasks</span>
+            <span v-if="sidebarOpen" class="font-semibold text-slate-100">Tasks</span>
           </a>
         </li>
       </ul>
@@ -65,6 +65,7 @@
   import { ref } from 'vue'
   import { addIcons, OhVueIcon } from 'oh-vue-icons'
   import { BiClipboardCheckFill } from 'oh-vue-icons/icons'
+  import Logo from './Logo.vue'
 
   addIcons(BiClipboardCheckFill)
 
