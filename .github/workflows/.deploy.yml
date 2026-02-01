@@ -7,7 +7,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.0.3
@@ -19,19 +18,23 @@ jobs:
             set -euo pipefail
 
             cd "${{ secrets.KANBAN_APP_DIR }}"
+
+            # Se ainda não tiver clonado, você pode clonar uma vez manualmente
+            # ou fazer esse if abaixo com um secret KANBAN_REPO_URL
             git pull
+
+            # BACKEND
             cd backend
             npm ci
             npx sequelize-cli db:migrate
             pm2 restart "${{ secrets.PM2_API_NAME }}" --update-env \
-              || pm2 start src/index.js --name "${{ secrets.PM2_API_NAME }}" --update-env
-
+              || PORT=3001 pm2 start src/index.js --name "${{ secrets.PM2_API_NAME }}" --update-env
             cd ..
-            cd frontend
 
+            # FRONTEND
+            cd frontend
             npm ci
             npm run build
-
             rm -rf "${{ secrets.KANBAN_FRONT_WEBROOT }}/"* || true
             cp -R dist/* "${{ secrets.KANBAN_FRONT_WEBROOT }}/"
             cd ..
